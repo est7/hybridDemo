@@ -12,6 +12,8 @@
         <activity android:name=".JNIActivity">
 
         </activity>
+
+
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main">
@@ -23,6 +25,9 @@
             </intent-filter>
 
         </activity>
+
+
+
     </application>
 
 </manifest>

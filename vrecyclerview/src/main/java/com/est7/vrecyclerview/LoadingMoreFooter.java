@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.jcodecraeer.xrecyclerview.progressindicator.AVLoadingIndicatorView;
+import com.est7.vrecyclerview.progressindicator.AVLoadingIndicatorView;
 
 public class LoadingMoreFooter extends LinearLayout {
 

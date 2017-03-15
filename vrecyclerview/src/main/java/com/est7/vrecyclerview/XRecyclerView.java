@@ -45,6 +45,8 @@ public class XRecyclerView extends RecyclerView {
     private LoadingListener mLoadingListener;
 
     private final RecyclerView.AdapterDataObserver mDataObserver = new DataObserver();
+    //adapter没有数据的时候显示,类似于listView的emptyView
+    private View mEmptyView;
 
     public XRecyclerView(Context context) {
         this(context, null);
@@ -78,6 +80,15 @@ public class XRecyclerView extends RecyclerView {
         if (mWrapAdapter != null) {
             mWrapAdapter.notifyDataSetChanged();
         }
+    }
+
+    public void setEmptyView(View emptyView) {
+        this.mEmptyView = emptyView;
+        mDataObserver.onChanged();
+    }
+
+    public View getEmptyView() {
+        return mEmptyView;
     }
 
     public int getHeadersCount() {
@@ -178,7 +189,11 @@ public class XRecyclerView extends RecyclerView {
         }
 
         public boolean isFooter(int position) {
-            return m == 0;
+            if(loadingMoreEnabled) {
+                return position == getItemCount() - 1;
+            }else {
+                return false;
+            }
         }
 
         @Override
@@ -412,11 +427,51 @@ public class XRecyclerView extends RecyclerView {
         }
     }
 
-    private class DataObserver extends AdapterDataObserver {
+    private class DataObserver extends RecyclerView.AdapterDataObserver {
+        @Override
+        public void onChanged() {
+            if (mWrapAdapter != null) {
+                mWrapAdapter.notifyDataSetChanged();
+            }
+            if (mWrapAdapter != null && mEmptyView != null) {
+                int emptyCount = 1 + getHeadersCount();
+                if (loadingMoreEnabled) {
+                    emptyCount++;
+                }
+                if (mWrapAdapter.getItemCount() == emptyCount) {
+                    mEmptyView.setVisibility(View.VISIBLE);
+                    XRecyclerView.this.setVisibility(View.GONE);
+                } else {
 
+                    mEmptyView.setVisibility(View.GONE);
+                    XRecyclerView.this.setVisibility(View.VISIBLE);
+                }
+            }
+        }
 
+        @Override
+        public void onItemRangeInserted(int positionStart, int itemCount) {
+            mWrapAdapter.notifyItemRangeInserted(positionStart, itemCount);
+        }
 
+        @Override
+        public void onItemRangeChanged(int positionStart, int itemCount) {
+            mWrapAdapter.notifyItemRangeChanged(positionStart, itemCount);
+        }
 
+        @Override
+        public void onItemRangeChanged(int positionStart, int itemCount, Object payload) {
+            mWrapAdapter.notifyItemRangeChanged(positionStart, itemCount, payload);
+        }
 
-    }
+        @Override
+        public void onItemRangeRemoved(int positionStart, int itemCount) {
+            mWrapAdapter.notifyItemRangeRemoved(positionStart, itemCount);
+        }
+
+        @Override
+        public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
+            mWrapAdapter.notifyItemMoved(fromPosition, toPosition);
+        }
+    };
 }

@@ -18,7 +18,6 @@ public interface  ApiService {
     @GET("/student/mobileRegister")
     Observable<HttpResult<UserBean>> login(@Query("phone") String phone, @Query("password") String psw);
 
-
     @GET("top250")
     Observable<HttpResult<List<Subject>>> getTopMovie(@Query("start") int start, @Query("count") int count);
 

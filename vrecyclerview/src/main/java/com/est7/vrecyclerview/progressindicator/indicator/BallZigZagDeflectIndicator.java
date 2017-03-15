@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Jack on 2015/10/19.
  */
-public class BallZigZagDeflectIndicator extends com.jcodecraeer.xrecyclerview.progressindicator.indicator.BallZigZagIndicator {
+public class BallZigZagDeflectIndicator extends BallZigZagIndicator {
 
 
 

@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Jack on 2015/10/19.
  */
-public class BallBeatIndicator extends com.jcodecraeer.xrecyclerview.progressindicator.indicator.BaseIndicatorController {
+public class BallBeatIndicator extends BaseIndicatorController {
 
     public static final float SCALE=1.0f;
 
