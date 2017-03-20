@@ -42,6 +42,7 @@ public class MianActivity extends MVPBaseActivity<MianContract.View, MianPresent
     @Override
     public void showLoading(String msg) {
         //empty
+
     }
 
     @Override
@@ -52,6 +53,7 @@ public class MianActivity extends MVPBaseActivity<MianContract.View, MianPresent
     @Override
     public void showError(String errorMsg) {
         //empty
+
     }
 
 

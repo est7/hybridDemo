@@ -35,5 +35,6 @@ public class HttpResult<T> {
         this.message = message;
     }
 
+
 }
 

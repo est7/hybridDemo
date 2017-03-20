@@ -18,7 +18,7 @@ public abstract class MVPBaseActivity<V extends BaseView, T extends BasePresente
         setContentView(getResId());
         //mView = getInstance(this, 0);
         mPresenter = getInstance(this, 1);
-        mPresenter.attachView((V) this);
+        mPresenter.attachModelView((V) this);
 
         initView();
     }
